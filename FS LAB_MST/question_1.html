@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Post</title>
+</head>
+<body>
+
+<h2>Create Post</h2>
+
+<form id="postForm">
+    <input type="text" id="title" placeholder="Enter title" required>
+    <br><br>
+
+    <textarea id="body" placeholder="Enter body" required></textarea>
+    <br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<p id="message"></p>
+
+<script>
+document.getElementById("postForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const body = document.getElementById("body").value;
+
+    fetch("/post", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            body: body
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("message").textContent = "Post submitted successfully!";
+    })
+    .catch(error => {
+        document.getElementById("message").textContent = "Error submitting post.";
+    });
+});
+</script>
+
+</body>
+</html>
