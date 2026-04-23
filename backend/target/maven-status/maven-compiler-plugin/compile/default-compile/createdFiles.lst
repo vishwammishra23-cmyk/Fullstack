@@ -1,8 +1,0 @@
-com\example\jobportal\controller\JobController.class
-com\example\jobportal\JobPortalApplication.class
-com\example\jobportal\model\Application.class
-com\example\jobportal\repository\ApplicationRepository.class
-com\example\jobportal\model\Job.class
-com\example\jobportal\controller\ApplicationController.class
-com\example\jobportal\DataLoader.class
-com\example\jobportal\repository\JobRepository.class
