@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Post</title>
+</head>
+<body>
+
+    <h2>Create a Post</h2>
+
+    <form id="postForm">
+        <label>Title:</label><br>
+        <input type="text" id="title" required><br><br>
+
+        <label>Body:</label><br>
+        <textarea id="body" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message" style="color: green;"></p>
+
+    <script>
+        document.getElementById("postForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById("title").value;
+            const body = document.getElementById("body").value;
+
+            try {
+                const response = await fetch("/posts", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ title, body })
+                });
+
+                if (response.ok) {
+                    document.getElementById("message").innerText = "Post submitted successfully!";
+                    document.getElementById("postForm").reset();
+                } else {
+                    document.getElementById("message").innerText = "Failed to submit post.";
+                }
+            } catch (error) {
+                document.getElementById("message").innerText = "Error occurred while submitting.";
+            }
+        });
+    </script>
+
+</body>
+</html>
